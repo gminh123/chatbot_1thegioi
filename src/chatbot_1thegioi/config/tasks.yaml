@@ -1,0 +1,40 @@
+greet_task:
+  description: >
+    Chào hỏi người dùng, giới thiệu chatbot, hỏi họ tên và đưa ra 2 lựa chọn:
+    (a) Xem thông tin chính từ 9 chủ đề trên 1thegioi.vn 
+    (b) Tìm kiếm thông tin cụ thể về lĩnh vực
+  expected_output: >
+    Lời chào thân thiện, giới thiệu chatbot 1thegioi.vn, hỏi họ tên, 
+    liệt kê 9 chủ đề (Thời sự, Nhịp đập công nghệ, Đột phá, AI & Blockchain, 
+    Kinh tế 4.0, Công nghệ quân sự, Lăng kính, Cà phê Một thế giới, Cạm bẫy số) 
+    và hướng dẫn người dùng chọn a hoặc b.
+  agent: greeter
+
+control_task:
+  description: >
+    Nhận lựa chọn từ user (a hoặc b), phân tích và gọi agent phù hợp:
+    - Nếu chọn a: gọi category_provider với chủ đề cụ thể
+    - Nếu chọn b: gọi search_summarizer với từ khóa tìm kiếm
+  expected_output: >
+    Kết quả từ agent tương ứng: danh sách 3 bài báo (lựa chọn a) 
+    hoặc bản tóm tắt tổng quan (lựa chọn b)
+  agent: controller
+
+category_task:
+  description: >
+    Truy cập vào một chủ đề cụ thể từ 9 chủ đề chính trên 1thegioi.vn
+    và lấy 3 bài báo đầu tiên từ chủ đề đó.
+  expected_output: >
+    Danh sách 3 bài báo đầu tiên từ chủ đề được yêu cầu, 
+    mỗi bài gồm tiêu đề và URL chính xác.
+  agent: category_provider
+
+search_summary_task:
+  description: >
+    Tìm kiếm các bài báo liên quan trực tiếp đến chủ đề được yêu cầu trên 1thegioi.vn,
+    thu thập nội dung chính và tạo một bản tóm tắt tổng quan chi tiết về chủ đề.
+  expected_output: >
+    Bản tóm tắt tổng quan chi tiết về chủ đề được yêu cầu, 
+    bao gồm các khía cạnh chính được đề cập trong các bài báo liên quan,
+    được tổ chức thành các phần rõ ràng và logic.
+  agent: search_summarizer
